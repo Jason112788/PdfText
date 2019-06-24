@@ -20,10 +20,10 @@ import java.util.Map;
 public class PdfHandler {
 
     /** 待处理文件根目录 */
-    private static String filePath = "";
+    private static String filePath = "C:\\Users\\zhuzhenhao\\Desktop\\pdf";
 
     /** Excel文件地址 */
-    private static String excelPath = "";
+    private static String excelPath = "C:\\Users\\zhuzhenhao\\Desktop\\1.xlsx";
 
     public static void main(String[] args) {
         // main方法调试
@@ -88,9 +88,10 @@ public class PdfHandler {
                         }
                     }
                 }
-                // 从文件路径读取sheetName
-                String[] split = file.getAbsolutePath().split("\\\\");
-                String sheetName = split[1];
+                // 剥离根目录, 二级目录就包含sheetName
+                String rareFilePath = file.getAbsolutePath().replace(Constants.LOG_FATHER_PATH + "\\", "");
+                String[] split = rareFilePath.split("\\\\");
+                String sheetName = split[0];
                 Map<String, String> dataMap = new HashMap<String, String>();
                 dataMap.put("id", id);
                 dataMap.put("signDate", signDate);
